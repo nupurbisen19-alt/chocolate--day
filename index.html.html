@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Chocolate Day ❤️</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #3e2723, #6d4c41);
+  color: #fff;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* PASSWORD SCREEN */
+.login {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+input {
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  width: 100%;
+  max-width: 280px;
+  margin: 10px auto;
+}
+
+button {
+  padding: 14px 25px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  background: #d2691e;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff8c42;
+}
+
+.hidden { display: none; }
+
+/* SURPRISE PAGE */
+h1 {
+  color: #ffccbc;
+  margin-top: 20px;
+}
+
+.message {
+  font-size: 18px;
+  padding: 15px;
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.7;
+  min-height: 120px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  padding: 20px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+/* HEARTS */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* CHOCOLATE RAIN */
+.choco {
+  position: fixed;
+  top: -30px;
+  font-size: 24px;
+  animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(110vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD PAGE -->
+<div class="login" id="login">
+  <h2>🍫 Enter Password 🍫</h2>
+  <input type="password" id="password" placeholder="Hint: Your name 😉">
+  <button onclick="unlock()">Open My Surprise ❤️</button>
+</div>
+
+<!-- SURPRISE PAGE -->
+<div id="surprise" class="hidden">
+
+  <h1>Happy Chocolate Day My Love 🍫❤️</h1>
+
+  <p class="message" id="typedText"></p>
+
+  <audio autoplay loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="gallery">
+    <img src="img1.jpg">
+    <img src="img2.jpg">
+    <img src="img3.jpg">
+    <img src="img4.jpg">
+    <img src="img5.jpg">
+    <img src="img6.jpg">
+    <img src="img7.jpg">
+    <img src="img8.jpg">
+    <img src="img9.jpg">
+    <img src="img10.jpg">
+  </div>
+</div>
+
+<script>
+// PASSWORD CHECK
+function unlock() {
+  const pass = document.getElementById("password").value.toLowerCase();
+  if (pass === "nurooh") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("surprise").classList.remove("hidden");
+    startTyping();
+    startHearts();
+    startChocolate();
+  } else {
+    alert("Wrong password 😜 Try again!");
+  }
+}
+
+// TYPING LOVE LETTER
+const text = `
+Nurooh ❤️  
+You are sweeter than chocolates 🍫  
+warmer than hugs 🤍  
+and the most beautiful part of my life.
+
+Every smile of yours melts my heart.  
+Every moment with you feels magical.  
+
+Happy Chocolate Day my love 💖  
+Forever yours 💫
+`;
+
+let i = 0;
+function startTyping() {
+  if (i < text.length) {
+    document.getElementById("typedText").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(startTyping, 40);
+  }
+}
+
+// HEART ANIMATION
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }, 400);
+}
+
+// CHOCOLATE RAIN
+function startChocolate() {
+  setInterval(() => {
+    const choco = document.createElement("div");
+    choco.className = "choco";
+    choco.innerHTML = "🍫";
+    choco.style.left = Math.random() * 100 + "vw";
+    choco.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(choco);
+    setTimeout(() => choco.remove(), 6000);
+  }, 500);
+}
+</script>
+
+</body>
+</html>
